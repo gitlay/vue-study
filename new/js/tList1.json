@@ -1,0 +1,29 @@
+{
+	"tlist":[
+		{
+			"id":"1",
+			"name":"技能11",
+			"isSelect":"select"
+		},
+		{
+			"id":"2",
+			"name":"技能22",
+			"isSelect":""
+		},
+		{
+			"id":"3",
+			"name":"技能33",
+			"isSelect":""
+		},
+		{
+			"id":"4",
+			"name":"技能44",
+			"isSelect":""
+		},
+		{
+			"id":"5",
+			"name":"技能55",
+			"isSelect":""
+		}
+	]
+}

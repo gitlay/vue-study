@@ -1,0 +1,77 @@
+.timeMachine{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: rgba(0,0,0,0.5);
+	display: none;
+	.timeChoose{
+		width: 100%;
+		height: 40%;
+		background: #FFFFFF;
+		position: fixed;
+		bottom: 0px;
+		left: 0px;
+		font-size: 0px;
+		letter-spacing: -6px;
+		.left-choose-box,.right-choose-box{
+			height: 85%;
+			display: inline-block;
+			vertical-align: top;
+			letter-spacing: normal;
+			position: relative;
+			.choose-box{
+				width: 96%;
+				height: 90%;
+				margin: 0 auto;
+				margin-top: 10px;
+				border-right:1px solid #838383;
+				overflow: auto;
+				box-sizing: border-box;
+				.date-line,.time-line{
+					width: 90%;
+					height: 40px;
+					border-bottom: 1px solid #C5C5C5;
+					font-size: 16px;
+					line-height: 40px;
+					text-align: center;
+					margin: 0 auto;
+					box-sizing: border-box;
+				}
+				#time-selected,#date-selected{
+					border: 1px solid #FFDC7D;
+					background: #FFFAC3;
+				}
+			}
+		}
+		.left-choose-box{
+			width: 60%;
+		}
+		.right-choose-box{
+			width: 40%;
+		}
+		.enter-time{
+			width: 100%;
+			height: 15%;
+			font-size: 0px;
+			letter-spacing: -6px;
+			border-top: 1px solid #D5D5D5;
+			box-shadow: 0 -3px 3px #D5D5D5;
+			.cancel,.enter{
+				width: 50%;
+				height: 100%;
+				display: inline-block;
+				vertical-align: top;
+				letter-spacing: normal;
+				font-size: 14px;
+				text-align: center;
+				line-height: 40px;
+			}
+			.cancel{
+				border-right: 1px solid #D5D5D5;
+				box-sizing: border-box;
+			}
+		}
+	}
+}

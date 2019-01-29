@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script src="js/TouchSlide.1.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/choose-city.css">
+    <script type="text/javascript" src="js/choose-city.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/other.css">
+    <script type="text/javascript" src="js/timeMachine.js"></script>
+    <script type="text/javascript" src="js/JCheck.js"></script>
+</head>
+<body>
+<div class="body">
+    <div class="WjPassword">
+        <form>
+            <ul>
+                <li class="fix">
+                    <span>姓名：</span>
+                    <input type="text" name="" placeholder="请输入您的真实姓名">
+                </li>
+                <li class="fix">
+                    <span>电话：</span>
+                    <input type="text" name="" value="17632154789">
+                </li>
+                <li class="fix">
+                    <span>所在区域：</span>
+                    <a href="javascript:;;" class="choose-city">
+                        <input type="text" name="" placeholder="点击选择" disabled>
+                        <i></i>
+                    </a>
+                </li>
+                <li class="fix">
+                    <span>详细地址：</span>
+                    <input type="text" name="" placeholder="请输入您的详细地址">
+                </li>
+                <li class="fix" @click="sel">
+                    <span>技能选择：</span>
+                    <input type="text" id="skillChoose" name="" :value="skill" disabled>
+
+                    <i></i>
+                </li>
+            </ul>
+            <div class="MasterRz fix">
+                <p>身份证上传：</p>
+                <div class="fix">
+                    <em class="item" style="margin-left:0px;">
+                        <img class="icon addImg" onclick="clickImg(this);" src="images/MasterRz1.jpg">
+                        <input name="url" type="file" class="upload_input" onchange="change(this)">
+                        <div class="preBlock">
+                            <img class="preview" alt="" name="pic">
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="images/delete.png">
+                    </em>
+                    <em class="item">
+                        <img class="icon addImg" onclick="clickImg(this);" src="images/MasterRz2.jpg">
+                        <input name="url" type="file" class="upload_input" onchange="change(this)">
+                        <div class="preBlock">
+                            <img class="preview" alt="" name="pic">
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="images/delete.png">
+                    </em>
+                </div>
+            </div>
+            <div class="MasterRz fix">
+                <p>技工证上传：</p>
+                <div class="fix">
+                    <em class="item" style="margin-left:0px;">
+                        <img class="icon addImg" onclick="clickImg(this);" src="images/MasterRz3.jpg">
+                        <input name="url" type="file" class="upload_input" onchange="change(this)">
+                        <div class="preBlock">
+                            <img class="preview" alt="" name="pic">
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="images/delete.png">
+                    </em>
+                </div>
+                <span>选择办公设备维修、维修电工必须上传相关证件才可入驻</span>
+            </div>
+            <a class="submit">立即提交</a>
+        </form>
+    </div>
+    <div class="MasterRzCg">
+        <em>
+            <img src="images/MasterRz.png">
+            <h3>提交成功！</h3>
+            <p>我们将在3个工作日内完成审核，并以电话的形式通知您。</p>
+            <span class="xiaos">确定</span>
+        </em>
+    </div>
+    <div class="province-list">
+        <div class="right">
+            <div class="list-title">
+                <span><img src="images/guanbi.png" class="close"></span>
+                选择省份
+            </div>
+            <div class="item-list">
+                <!--请求回来的省份在这里-->
+            </div>
+        </div>
+    </div>
+    <div class="city-list">
+        <div class="right">
+            <div class="list-title">
+                <span><img src="images/guanbi.png" class="close"></span>
+                选择城市
+            </div>
+            <div class="item-list">
+                <!--请求回来的市在这里-->
+            </div>
+        </div>
+    </div>
+    <div class="area-list">
+        <div class="right">
+            <div class="list-title">
+                <span><img src="images/guanbi.png" class="close"></span>
+                选择区县
+            </div>
+            <div class="item-list">
+                <!--请求回来的区县在这里-->
+            </div>
+        </div>
+    </div>
+    <div class="slideUp">
+        <div class="slideBox">
+            <div class="liList">
+                <one v-for="(item,index) in tlist" :key="item.id" :id="item.id" :name="item.name" :child="item.child"
+                     @changes="xuan"></one>
+            </div>
+            <div class="enterBtn" @click="sub">
+                <button>确认</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+<style>
+    .slideUp {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9;
+        display: none;
+    }
+
+    .slideBox {
+        width: 100%;
+        height: 200px;
+        background: #FFFFFF;
+        position: fixed;
+        left: 0px;
+        bottom: -200px;
+        overflow: auto
+    }
+
+    .slideBox .liList {
+        width: 100%;
+        height: 150px;
+    }
+
+    .slideBox .liList .line {
+        width: 100%;
+        /* height: 50px; */
+        border-bottom: 1px solid #E3E3E3;
+        box-sizing: border-box;
+        line-height: 50px;
+        padding: 0px 10px;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .slideBox .liList .line .check {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
+    .slideBox .liList .line .check .checkO {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        margin: 15px auto;
+        border: 1px solid #A3A3A3;
+        box-sizing: border-box;
+        padding-top: 2px
+    }
+
+    .slideBox .liList .line .check .checkO .checkIn {
+        width: 12px;
+        height: 12px;
+        background: #fa7d1b;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+    .slideBox .liList .line .name {
+        width: 100%;
+        height: 100%;
+        padding-left: 50px;
+        box-sizing: border-box;
+    }
+
+
+    .slideBox .liList .line1 {
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #E3E3E3;
+        box-sizing: border-box;
+        line-height: 50px;
+        padding: 0px 10px;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .slideBox .liList .line1 .check1 {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
+    .slideBox .liList .line1 .check1 .checkO1 {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        margin: 15px auto;
+        border: 1px solid #A3A3A3;
+        box-sizing: border-box;
+        padding-top: 2px
+    }
+
+    .slideBox .liList .line1 .check1 .checkO1 .checkIn1 {
+        width: 12px;
+        height: 12px;
+        background: #fa7d1b;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+    .slideBox .liList .line1 .name1 {
+        width: 100%;
+        height: 100%;
+        padding-left: 50px;
+        box-sizing: border-box;
+    }
+
+
+    .slideBox .enterBtn {
+        width: 100%;
+        height: 50px;
+    }
+
+    .slideBox .enterBtn button {
+        width: 84%;
+        height: 40px;
+        line-height: 40px;
+        border: none;
+        background: none;
+        display: block;
+        margin: 0 auto;
+        background: #fa7d1b;
+        color: #FFFFFF;
+        border-radius: 10px;
+        font-size: 16px;
+        letter-spacing: 6px;
+        margin-top: 5px;
+    }
+
+    #skillChoose {
+        background: #FFFFFF;
+    }
+
+    .liList {
+        width: 100%;
+        float: left;
+        overflow: auto;
+        height: 100%;
+    }
+
+    .liList .rightList {
+        width: 100%;
+
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+<script type="text/javascript">
+    var two = {
+        props: ['id', 'name'],
+        data: function () {
+            return {
+                flag: false
+            }
+        },
+        methods: {
+            che: function ( name) {
+                app.xuan(name)
+                this.flag = this.flag ? false : true
+            }
+        },
+        template: '<div class="line" ><div class="check" :tid="id"  :name="name" @click="che(name)"><div class="checkO"><div class="checkIn" v-show="flag" :name="name" ></div></div></div><div class="name">{{name}}</div><div class=""></div></div>'
+
+    }
+    var one = {
+        props: ['id', 'name', 'child'],
+        components: {two},
+        data: function () {
+            return {
+                flag: false
+            }
+        },
+        methods: {
+            che: function (name) {
+
+                this.$emit('changes', name)
+                this.flag = this.flag ? false : true
+                //console.log(this.$refs.child)
+            }
+        },
+        template: '<div class="line" ><div class="check" :tid="id" :name="name" @click="che(name)"><div class="checkO" ><div class="checkIn "  v-show="flag" :name="name"></div></div></div><div class="name">{{name}}</div><div class=""></div><div class="rightList" v-show="flag"><two v-for="(ele,index) in child" :key="ele.id" :id="ele.id" :name="ele.name" ></two></div></div>'
+    }
+
+
+    var app = new Vue({
+        el: '.body',
+        data: {
+            skill: '',
+            tlist: '',
+            big: new Array()
+        },
+        components: {one, two},
+        methods: {
+            sel: function () {
+                $(".slideUp").fadeIn(300, function () {
+                    $(".slideBox").animate({'bottom': '0px'}, 100)
+                })
+            },
+            sub: function () {
+                $(".slideBox").animate({'bottom': '-200px'}, 100, function () {
+                    $('.slideUp').fadeOut(300)
+                })
+            },
+            xuan: function (name) {
+                console.log(name);
+                console.log(this.big);
+                var index = this.big.indexOf(name);
+                if (index > -1) {
+                    this.big.splice(index, 1);
+                }else{
+                    this.big.push(name);
+                }
+
+                let str = '';
+                for (i = 0; i < this.big.length; i++) {
+                    str += ' ' + this.big[i];
+                }
+                this.skill = str;
+            }
+        },
+        mounted() {
+            var _this = this;
+            $.ajax({
+                url: 'https://tiger.gitlay.com/new/js/tList.json',
+                type: 'get',
+                dataType: 'JSON',
+                data: "",
+                timeout: 10000,
+                success: function (res, status, xhr) {
+                    var obj = res
+                    _this.tlist = obj.tlist
+                    console.log(_this.tlist)
+                }
+            })
+        },
+        watch: {
+            tlist: function (val) {
+                this.tlist = val
+                console.log(this.tlist)
+            },
+
+        }
+    })
+</script>
+<script type="text/javascript">
+    $(".submit").click(function () {
+        $(".MasterRzCg").show();
+    });
+    $(".xiaos").click(function () {
+        $(".MasterRzCg").hide();
+    });
+    $(document).ready(function () {
+        $(".xiugai").click(function () {
+            $(".revise").show();
+        });
+    });
+    $(document).ready(function () {
+        $(".hide").click(function () {
+            $(".revise").hide();
+        });
+        $(".xiagao").click(function () {
+            $(this).toggleClass("currentDd").siblings(".xiagao").removeClass("currentDd")
+            $(this).toggleClass("currentDt").siblings(".xiagao").removeClass("currentDt")
+            $(this).next(".sub").slideToggle(300).siblings(".sub").slideUp(500);
+        });
+    });
+
+    function show(imgID, iptfileupload) { // 接收传过来的img标签的ID 和 当前input的框的ID
+        var file_img = document.getElementById(imgID),
+            iptfileupload = document.getElementById(iptfileupload);
+        // 调用上传图片函数
+        getPath(file_img, iptfileupload, file_img);
+    };
+
+    //上传图片函数封装
+    function getPath(obj, fileQuery, transImg) {
+
+        var imgSrc = '',
+            imgArr = [],
+            strSrc = '';
+
+        if (window.navigator.userAgent.indexOf("MSIE") >= 1) { // IE浏览器判断
+            if (obj.select) {
+                obj.select();
+                var path = document.selection.createRange().text;
+                alert(path);
+                obj.removeAttribute("src");
+                imgSrc = fileQuery.value;
+                imgArr = imgSrc.split('.');
+                strSrc = imgArr[imgArr.length - 1].toLowerCase();
+                if (strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0) {
+                    obj.setAttribute("src", transImg);
+                    obj.style.filter =
+                        "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + path + "', sizingMethod='scale');"; // IE通过滤镜的方式实现图片显示
+                } else {
+                    //try{
+                    throw new Error('File type Error! please image file upload..');
+                    //}catch(e){
+                    //  alert('name: ' + e.name + 'message: ' + e.message) ;
+                    //}
+                }
+            } else {
+                // alert(fileQuery.value) ;
+                imgSrc = fileQuery.value;
+                imgArr = imgSrc.split('.');
+                strSrc = imgArr[imgArr.length - 1].toLowerCase();
+                if (strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0) {
+                    obj.src = fileQuery.value;
+                } else {
+                    //try{
+                    throw new Error('File type Error! please image file upload..');
+                    //}catch(e){
+                    //  alert('name: ' + e.name + 'message: ' + e.message) ;
+                    //}
+                }
+
+            }
+
+        } else {
+            var file = fileQuery.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+
+                imgSrc = fileQuery.value;
+                imgArr = imgSrc.split('.');
+                strSrc = imgArr[imgArr.length - 1].toLowerCase();
+                if (strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0) {
+                    obj.setAttribute("src", e.target.result);
+                } else {
+                    //try{
+                    throw new Error('File type Error! please image file upload..');
+                    //}catch(e){
+                    //  alert('name: ' + e.name + 'message: ' + e.message) ;
+                    //}
+                }
+
+                // alert(e.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    $(document).ready(function () {
+        $(".Telephone").click(function () {
+            $(".CustomerF").slideToggle();
+        });
+    });
+    //点击
+    var clickImg = function (obj) {
+        $(obj).parent().find('.upload_input').click();
+    }
+    //删除
+    var deleteImg = function (obj) {
+        $(obj).parent().find('input').val('');
+        $(obj).parent().find('img.preview').attr("src", "");
+        //IE9以下
+        $(obj).parent().find('img.preview').css("filter", "");
+        $(obj).hide();
+        $(obj).parent().find('.addImg').show();
+    }
+
+    //选择图片
+    function change(file) {
+        //预览
+        var pic = $(file).parent().find(".preview");
+        //添加按钮
+        var addImg = $(file).parent().find(".addImg");
+        //删除按钮
+        var deleteImg = $(file).parent().find(".delete");
+
+        var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
+
+        // gif在IE浏览器暂时无法显示
+        if (ext != 'png' && ext != 'jpg' && ext != 'jpeg') {
+            if (ext != '') {
+                alert("图片的格式必须为png或者jpg或者jpeg格式！");
+            }
+            return;
+        }
+        //判断IE版本
+        var isIE = navigator.userAgent.match(/MSIE/) != null,
+            isIE6 = navigator.userAgent.match(/MSIE 6.0/) != null;
+        isIE10 = navigator.userAgent.match(/MSIE 10.0/) != null;
+        if (isIE && !isIE10) {
+            file.select();
+            var reallocalpath = document.selection.createRange().text;
+            // IE6浏览器设置img的src为本地路径可以直接显示图片
+            if (isIE6) {
+                pic.attr("src", reallocalpath);
+            } else {
+                //    非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
+                pic.css("filter", "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src=    \"" + reallocalpath + "\")");
+                // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
+                pic.attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAP///   wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+            }
+            addImg.hide();
+            deleteImg.show();
+        } else {
+            html5Reader(file, pic, addImg, deleteImg);
+        }
+    }
+
+    //H5渲染
+    function html5Reader(file, pic, addImg, deleteImg) {
+        var file = file.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            pic.attr("src", this.result);
+        }
+        addImg.hide();
+        deleteImg.show();
+    }
+
+    $(document).ready(function () {
+        $(".xiugai").click(function () {
+            $(".revise").show();
+        });
+    });
+    $(document).ready(function () {
+        $(".hide").click(function () {
+            $(".revise").hide();
+        });
+        $(".xiagao").click(function () {
+            $(this).toggleClass("currentDd").siblings(".xiagao").removeClass("currentDd")
+            $(this).toggleClass("currentDt").siblings(".xiagao").removeClass("currentDt")
+            $(this).next(".sub").slideToggle(300).siblings(".sub").slideUp(500);
+        });
+    });
+
+    function show(imgID, iptfileupload) { // 接收传过来的img标签的ID 和 当前input的框的ID
+        var file_img = document.getElementById(imgID),
+            iptfileupload = document.getElementById(iptfileupload);
+        // 调用上传图片函数
+        getPath(file_img, iptfileupload, file_img);
+    };
+
+    //上传图片函数封装
+    function getPath(obj, fileQuery, transImg) {
+
+        var imgSrc = '',
+            imgArr = [],
+            strSrc = '';
+
+        if (window.navigator.userAgent.indexOf("MSIE") >= 1) { // IE浏览器判断
+            if (obj.select) {
+                obj.select();
+                var path = document.selection.createRange().text;
+                alert(path);
+                obj.removeAttribute("src");
+                imgSrc = fileQuery.value;
+                imgArr = imgSrc.split('.');
+                strSrc = imgArr[imgArr.length - 1].toLowerCase();
+                if (strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0) {
+                    obj.setAttribute("src", transImg);
+                    obj.style.filter =
+                        "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + path + "', sizingMethod='scale');"; // IE通过滤镜的方式实现图片显示
+                } else {
+                    //try{
+                    throw new Error('File type Error! please image file upload..');
+                    //}catch(e){
+                    //  alert('name: ' + e.name + 'message: ' + e.message) ;
+                    //}
+                }
+            } else {
+                // alert(fileQuery.value) ;
+                imgSrc = fileQuery.value;
+                imgArr = imgSrc.split('.');
+                strSrc = imgArr[imgArr.length - 1].toLowerCase();
+                if (strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0) {
+                    obj.src = fileQuery.value;
+                } else {
+                    //try{
+                    throw new Error('File type Error! please image file upload..');
+                    //}catch(e){
+                    //  alert('name: ' + e.name + 'message: ' + e.message) ;
+                    //}
+                }
+
+            }
+
+        } else {
+            var file = fileQuery.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+
+                imgSrc = fileQuery.value;
+                imgArr = imgSrc.split('.');
+                strSrc = imgArr[imgArr.length - 1].toLowerCase();
+                if (strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0) {
+                    obj.setAttribute("src", e.target.result);
+                } else {
+                    //try{
+                    throw new Error('File type Error! please image file upload..');
+                    //}catch(e){
+                    //  alert('name: ' + e.name + 'message: ' + e.message) ;
+                    //}
+                }
+
+                // alert(e.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -11,7 +11,6 @@
     </div>
 
 </template>
-
 <script>
     import  top from '../components/Public/top'
     import  banner from '../components/Index/banner'
@@ -23,7 +22,17 @@
     import bottom from "../components/Public/bottom";
     export default {
         name: "Index",
-        components:{process, banner,top,search,menus,deal,recommend,bottom}
+        components:{process, banner,top,search,menus,deal,recommend,bottom},
+        mounted() {
+            axios.get('/user/12345')
+                .then(function(response) {
+                    console.log(response.data);
+                    console.log(response.status);
+                    console.log(response.statusText);
+                    console.log(response.headers);
+                    console.log(response.config);
+                });
+        }
     }
 </script>
 
