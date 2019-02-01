@@ -20,20 +20,11 @@
     import  recommend from '../components/Index/recommend'
     import process from "../components/Index/process";
     import bottom from "../components/Public/bottom";
-    import axios from 'axios'
+
     export default {
         name: "Index",
         components:{process, banner,top,search,menus,deal,recommend,bottom},
-        mounted() {
-            axios.get('/user/12345')
-                .then(function(response) {
-                    console.log(response.data);
-                    console.log(response.status);
-                    console.log(response.statusText);
-                    console.log(response.headers);
-                    console.log(response.config);
-                });
-        }
+
     }
 </script>
 

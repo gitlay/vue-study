@@ -34,54 +34,7 @@
                             <div class="index_Dealdz fix"><em></em><span>峻峰华亭A座802号</span></div>
                         </router-link>
                     </swiper-slide>
-                    <swiper-slide>
 
-                        <router-link to="/detail">
-                            <div class="index_Dealtp fix"><i><img src="../../../public/images/index_Deal.jpg"/></i>
-                            </div>
-                            <div class="index_Dealsm fix"><em>价差</em>
-                                <h3>1900.00</h3><span>万元</span></div>
-                            <div class="index_Dealje fix"><span> 成交价 0.00万</span>
-                                <p> 市场价 0.000万元</p></div>
-                            <div class="index_Dealtm fix"><span>拍卖时间 2019-01-08 10:00:0</span></div>
-                            <div class="index_Dealdz fix"><em></em><span>峻峰华亭A座802号</span></div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide>
-
-                        <router-link to="/detail">
-                            <div class="index_Dealtp fix"><i><img src="../../../public/images/index_Deal.jpg"/></i>
-                            </div>
-                            <div class="index_Dealsm fix"><em>价差</em>
-                                <h3>1900.00</h3><span>万元</span></div>
-                            <div class="index_Dealje fix"><span> 成交价 0.00万</span>
-                                <p> 市场价 0.000万元</p></div>
-                            <div class="index_Dealtm fix"><span>拍卖时间 2019-01-08 10:00:0</span></div>
-                            <div class="index_Dealdz fix"><em></em><span>峻峰华亭A座802号</span></div>
-                        </router-link>
-                    </swiper-slide>
-                    <swiper-slide>
-
-                        <router-link to="/detail">
-                            <div class="index_Dealtp fix"><i><img src="../../../public/images/index_Deal.jpg"/></i>
-                            </div>
-                            <div class="index_Dealsm fix"><em>价差</em>
-                                <h3>1900.00</h3><span>万元</span></div>
-                            <div class="index_Dealje fix"><span> 成交价 0.00万</span>
-                                <p> 市场价 0.000万元</p></div>
-                            <div class="index_Dealtm fix"><span>拍卖时间 2019-01-08 10:00:0</span></div>
-                            <div class="index_Dealdz fix"><em></em><span>峻峰华亭A座802号</span></div>
-                        </router-link>
-                    </swiper-slide>
-                    <router-link to="/detail">
-                        <div class="index_Dealtp fix"><i><img src="../../../public/images/index_Deal.jpg"/></i></div>
-                        <div class="index_Dealsm fix"><em>价差</em>
-                            <h3>1900.00</h3><span>万元</span></div>
-                        <div class="index_Dealje fix"><span> 成交价 0.00万</span>
-                            <p> 市场价 0.000万元</p></div>
-                        <div class="index_Dealtm fix"><span>拍卖时间 2019-01-08 10:00:0</span></div>
-                        <div class="index_Dealdz fix"><em></em><span>峻峰华亭A座802号</span></div>
-                    </router-link>
                 </swiper-slide>
             </swiper>
 
